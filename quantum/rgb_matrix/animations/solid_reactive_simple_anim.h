@@ -8,6 +8,7 @@ static HSV SOLID_REACTIVE_SIMPLE_math(HSV hsv, uint16_t offset) {
     hsv.h = scale16by8(g_rgb_timer, add8(rgb_matrix_config.speed, 1) >> 6);
 #            endif
     hsv.v = scale8(255 - offset, hsv.v);
+
     return hsv;
 }
 

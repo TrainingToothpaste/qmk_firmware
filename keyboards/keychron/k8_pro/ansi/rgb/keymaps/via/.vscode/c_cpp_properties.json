@@ -1,0 +1,27 @@
+{
+    "configurations": [
+        {
+            "name": "windows-gcc-x64",
+            "compilerArgs": [
+                "-mmcu=atmega32u4"
+            ],
+            "compilerPath": "gcc",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "compileCommands": "C:/Users/michellepollack/qmk_firmware/compile_commands.json",
+            "intelliSenseMode": "gcc-x64",
+            "browse": {
+                "path": [
+                    "${workspaceFolder}"
+                ],
+                "limitSymbolsToIncludedHeaders": true,
+                "databaseFilename": ""
+            },
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "configurationProvider": "ms-vscode.makefile-tools"
+        }
+    ],
+    "version": 4
+}
