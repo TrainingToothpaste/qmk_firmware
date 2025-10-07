@@ -82,7 +82,15 @@ bool TYPING_HEATMAP(effect_params_t* params) {
                 uint8_t val = g_rgb_frame_buffer[row][col];
                 if (!HAS_ANY_FLAGS(g_led_config.flags[g_led_config.matrix_co[row][col]], params->flags)) continue;
 
+                //orig rainbow:
+
                 HSV hsv = {170 - qsub8(val, 85), rgb_matrix_config.hsv.s, scale8((qadd8(170, val) - 170) * 3, rgb_matrix_config.hsv.v)};
+
+
+
+                //matcha → white 1
+                //HSV hsv = {85, qsub8(255, val), scale8(val, 255)};
+
                 RGB rgb = rgb_matrix_hsv_to_rgb(hsv);
                 rgb_matrix_set_color(g_led_config.matrix_co[row][col], rgb.r, rgb.g, rgb.b);
 

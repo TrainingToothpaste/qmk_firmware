@@ -1,20 +1,12 @@
 #include QMK_KEYBOARD_H
 #include "keychron_common.h"
 
-//custom
-//#define DYNAMIC_KEYMAP_LAYER_COUNT 5
-
 enum layers {
     MAC_BASE,
     MAC_FN,
     WIN_BASE,
     WIN_FN,
-    FN_RSFT, //extra layer for holding both FN & R Shift
 };
-
-//CUSTOM fn & RSft tracking
-static bool fn_held = false;
-static bool rsft_held = false;
 
 enum custom_keycodes {
     KC_EMMIE = SAFE_RANGE,
@@ -51,7 +43,6 @@ enum custom_keycodes {
     KC_KEYCOL,
     KC_PUB,
     KC_LOG5,
-    KC_SENDLOG,
     KC_LOGT,
     KC_LOGE,
     KC_REG,
@@ -60,9 +51,7 @@ enum custom_keycodes {
     KC_TEL,
     KC_EVENT,
     KC_SPHISH,
-    KC_MSC,
-    KC_GVUP,
-    KC_GVDWN
+    KC_MSC
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -70,7 +59,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return false;
     }
 
-    //custom keycodes:
+    //custom:
 
     switch (keycode) {
     case KC_EMMIE: //space, em dash, space
@@ -93,37 +82,37 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     case KC_ZUKO:
         if (record->event.pressed) {
-            SEND_STRING("Chelle here. ");
+            SEND_STRING("Michelle here! ");
         } else {
         }
         break;
 
     case KC_ZUKO2:
         if (record->event.pressed) {
-            SEND_STRING("Chelle from Tech here. ");
+            SEND_STRING("Michelle from Tech here! ");
         } else {
         }
         break;
 
     case KC_ZUKO3:
         if (record->event.pressed) {
-            SEND_STRING("Chelle from MSC Tech here. ");
+            SEND_STRING("Michelle from MSC Tech here! ");
         } else {
         }
         break;
 
     case KC_ZUKO4:
         if (record->event.pressed) {
-            SEND_STRING("Chelle from MSC Tech here. I'd be happy to help! ");
+            SEND_STRING("Michelle from MSC Tech here! I'd be happy to help! ");
         } else {
         }
         break;
 
     case KC_ZUKO5:
         if (record->event.pressed) {
-            SEND_STRING("Chelle from MSC Tech here. I'd be happy to help! "
+            SEND_STRING("Michelle from MSC Tech here! I'd be happy to help! "
             SS_DELAY(250)
-            "I'll be available for a call at around TIME, if that's a good time for you.");
+            "I'll be available for a call at around TIME, if that's a good time for you!");
         } else {
         }
         break;
@@ -151,7 +140,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     case KC_AVAIL2:
         if (record->event.pressed) {
-            SEND_STRING("I'll be available for a call at around TIME, if that's a good time for you.");
+            SEND_STRING("I'll be available for a call at around TIME, if that's a good time for you!");
         } else {
         }
         break;
@@ -165,7 +154,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     case KC_TIME:
         if (record->event.pressed) {
-            SEND_STRING(", if that's a good time for you.");
+            SEND_STRING(", if that's a good time for you!");
         } else {
         }
         break;
@@ -212,7 +201,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     case KC_STILL:
         if (record->event.pressed) {
-            SEND_STRING("Chelle from MSC Tech here. Just wanted to reach out and see if you still need assistance "
+            SEND_STRING("Michelle from MSC Tech here! Just wanted to reach out and see if you still need assistance "
             SS_DELAY(250)
             "with this request as we haven't heard back in a bit. If so, let us know and we'll be happy to help!");
         } else {
@@ -355,8 +344,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         if (record->event.pressed) {
             SEND_STRING(SS_TAP(X_M)
             SS_DELAY(440)
-            ":5"
-            SS_TAP(X_TAB)SS_TAP(X_TAB)SS_TAP(X_TAB)SS_TAP(X_TAB)SS_TAP(X_TAB)SS_TAP(X_TAB)SS_TAP(X_TAB)SS_TAP(X_TAB)SS_TAP(X_ENT));
+            SS_DOWN(X_LSFT)SS_TAP(X_SCLN)SS_UP(X_LSFT)SS_TAP(X_5)SS_TAP(X_TAB)SS_TAP(X_TAB)SS_TAP(X_TAB)SS_TAP(X_TAB)SS_TAP(X_TAB)SS_TAP(X_TAB)SS_TAP(X_TAB)SS_TAP(X_TAB)SS_TAP(X_ENT));
         } else {
         }
         break;
@@ -373,18 +361,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case KC_LOGE: //hits tab 8x to enter logged time
         if (record->event.pressed) {
             SEND_STRING(SS_TAP(X_TAB)SS_TAP(X_TAB)SS_TAP(X_TAB)SS_TAP(X_TAB)SS_TAP(X_TAB)SS_TAP(X_TAB)SS_TAP(X_TAB)SS_TAP(X_TAB)SS_TAP(X_ENT));
-        } else {
-        }
-        break;
-
-    case KC_SENDLOG: //ctrl & enter, then log 5 minutes
-        if (record->event.pressed) {
-            SEND_STRING(SS_DOWN(X_RCTL)SS_TAP(X_ENT)SS_UP(X_RCTL)
-            SS_DELAY(250)
-            SS_TAP(X_M)
-            SS_DELAY(440)
-           ":5"
-            SS_TAP(X_TAB)SS_TAP(X_TAB)SS_TAP(X_TAB)SS_TAP(X_TAB)SS_TAP(X_TAB)SS_TAP(X_TAB)SS_TAP(X_TAB)SS_TAP(X_TAB)SS_TAP(X_ENT));
         } else {
         }
         break;
@@ -486,42 +462,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         break;
 
-    case KC_GVUP:
-        if (record->event.pressed) {
-            SEND_STRING(SS_DOWN(X_LALT)SS_DOWN(X_LCTL)SS_TAP(X_EQL)SS_UP(X_LALT)SS_UP(X_LCTL));
-        } else {
-        }
-        break;
-
-    case KC_GVDWN:
-        if (record->event.pressed) {
-            SEND_STRING(SS_DOWN(X_LALT)SS_DOWN(X_LCTL)SS_TAP(X_MINS)SS_UP(X_LALT)SS_UP(X_LCTL));
-        } else {
-        }
-        break;
-
     //end of macros
     }
-
-    //CUSTOM: Check for FN key
-    if (keycode == MO(MAC_FN) || keycode == MO(WIN_FN)) {
-        fn_held = record->event.pressed;
-    }
-
-    // Check for Right Shift
-    if (keycode == KC_RSFT) {
-        rsft_held = record->event.pressed;
-    }
-
-    // Toggle FN_RSFT layer
-    if (fn_held && rsft_held) {
-        layer_on(FN_RSFT);
-    } else {
-        layer_off(FN_RSFT);
-    }
-
-    //END of checking fn
-
     return true;
 }
 
@@ -540,7 +482,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,  BT_HST1,  BT_HST2,  BT_HST3,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  RGB_SAD,  RGB_SAI,    KC_DELUP,  KC_MPRV,  KC_MNXT,  KC_TRY,
         KC_EVENT, RGB_MOD,  RGB_VAI,  RGB_HUI,  KC_REG,   RGB_SPI,  _______,  _______,  _______,  _______,  KC_ZUKO,  KC_ZUKO2, KC_ZUKO3,   KC_ZUKO4,  KC_ZUKO5, KC_AVAIL2,KC_RES,
         _______,  RGB_RMOD, RGB_VAD,  RGB_HUD,  RGB_SAD,  RGB_SPD,  _______,  _______,  _______,  _______,  _______,  KC_AWE,               KC_LOOK,
-        _______,            _______,  _______,  _______,  _______,  BAT_LVL,  NK_TOGG,  KC_LOGT,  KC_LOGE,  KC_LOG5,  KC_MSC,               _______,             RALT(KC_EQL),
+        _______,            _______,  _______,  _______,  _______,  BAT_LVL,  NK_TOGG,  KC_LOGT,  KC_LOGE,  KC_LOG5,  KC_MSC,               KC_PHONE,            RALT(KC_EQL),
         _______,  _______,  KC_TEL,                                 KC_MERGE,                               KC_NGROUP,KC_WGROUP,_______,    KC_PUB,    KC_DESKL, RALT(KC_MINS),KC_DESKR),
 
     [WIN_BASE] = LAYOUT_tkl_ansi(
@@ -556,25 +498,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,  BT_HST1,  BT_HST2,  BT_HST3,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  RGB_SAD,  RGB_SAI,    KC_DELUP,  KC_MPRV,  KC_MNXT,  KC_TRY,
         KC_EVENT, RGB_MOD,  RGB_VAI,  RGB_HUI,  KC_REG,   RGB_SPI,  _______,  _______,  _______,  _______,  KC_ZUKO,  KC_ZUKO2, KC_ZUKO3,   KC_ZUKO4,  KC_ZUKO5, KC_AVAIL2,KC_RES,
         _______,  RGB_RMOD, RGB_VAD,  RGB_HUD,  RGB_SAD,  RGB_SPD,  _______,  _______,  _______,  _______,  _______,  KC_AWE,               KC_LOOK,
-        _______,            _______,  _______,  _______,  _______,  BAT_LVL,  NK_TOGG,  KC_LOGT,  KC_LOGE,  KC_LOG5,  KC_MSC,               _______,             RGB_HUI,
-        _______,  _______,  KC_TEL,                                 KC_MERGE,                               KC_NGROUP,KC_WGROUP,_______,    KC_PUB,    RGB_SPD,  RGB_HUD,  RGB_SPI),
-
-    [FN_RSFT] = LAYOUT_tkl_ansi(
-        _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,    _______,   _______,  _______,  _______,
-        _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,    _______,   _______,  _______,  _______,
-        _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,    _______,   _______,  _______,  _______,
-        _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,             KC_SENDLOG,
-        _______,            _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,              _______,             _______,
-        _______,  _______,  _______,                                _______,                                _______,  _______,  _______,    _______,   _______,  _______,  _______)
+        _______,            _______,  _______,  _______,  _______,  BAT_LVL,  NK_TOGG,  KC_LOGT,  KC_LOGE,  KC_LOG5,  KC_TAXUP,             KC_PHONE,            RGB_HUI,
+        _______,  _______,  KC_TEL,                                 KC_MERGE,                               KC_NGROUP,KC_WGROUP,_______,    KC_PUB,    RGB_SPD,  RGB_HUD,  RGB_SPI)
 };
 
 // clang-format on
 #if defined(ENCODER_MAP_ENABLE)
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
     [MAC_BASE] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU)},
-    [MAC_FN]   = {ENCODER_CCW_CW(KC_GVDWN, KC_GVUP)},
+    [MAC_FN]   = {ENCODER_CCW_CW(RGB_SAD, RGB_SAI)},
     [WIN_BASE] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU)},
     [WIN_FN]   = {ENCODER_CCW_CW(RGB_SAD, RGB_SAI)},
-    [FN_RSFT]  = {ENCODER_CCW_CW(_______, _______)},
 };
 #endif // ENCODER_MAP_ENABLE
