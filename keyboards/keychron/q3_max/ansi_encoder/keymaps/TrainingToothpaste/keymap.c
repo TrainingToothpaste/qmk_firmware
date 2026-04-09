@@ -62,7 +62,8 @@ enum custom_keycodes {
     KC_SPHISH,
     KC_MSC,
     KC_GVUP,
-    KC_GVDWN
+    KC_GVDWN,
+    KC_GMUTE
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -488,14 +489,21 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     case KC_GVUP:
         if (record->event.pressed) {
-            SEND_STRING(SS_DOWN(X_LALT)SS_DOWN(X_LCTL)SS_TAP(X_EQL)SS_UP(X_LALT)SS_UP(X_LCTL));
+            SEND_STRING(SS_DOWN(X_LALT) SS_TAP(X_EQL)SS_DOWN(X_LALT));
         } else {
         }
         break;
 
     case KC_GVDWN:
         if (record->event.pressed) {
-            SEND_STRING(SS_DOWN(X_LALT)SS_DOWN(X_LCTL)SS_TAP(X_MINS)SS_UP(X_LALT)SS_UP(X_LCTL));
+            SEND_STRING(SS_DOWN(X_LALT) SS_TAP(X_MINS)SS_UP(X_LALT));
+        } else {
+        }
+        break;
+
+    case KC_GMUTE:
+        if (record->event.pressed) {
+            SEND_STRING(SS_DOWN(X_LALT) SS_TAP(X_F12)SS_UP(X_LALT)SS_UP(X_LALT));
         } else {
         }
         break;
@@ -536,7 +544,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_LCTL,  KC_LGUI,  KC_LALT,                                KC_SPC,                                 KC_RALT,  KC_RGUI,MO(MAC_FN),   KC_RCTL,   KC_LEFT,  KC_DOWN,  KC_RGHT),
 
     [MAC_FN] = LAYOUT_tkl_ansi(
-        KC_SUNQ,  KC_F1,    KC_BRIU,  KC_TASK,  KC_FILE, LCTL(KC_R),RGB_VAI, KC_SPHISH, KC_STILL, KC_CLOSE, KC_SPAM,  KC_SPAM2, KC_SPAM3,   _______,   KC_ESCAL, KC_CARE,  KC_HELPCARE,
+        KC_SUNQ,  KC_F1,    KC_BRIU,  KC_TASK,  KC_FILE, LCTL(KC_R),RGB_VAI, KC_SPHISH, KC_STILL, KC_CLOSE, KC_SPAM,  KC_SPAM2, KC_SPAM3,   KC_GMUTE,  KC_ESCAL, KC_CARE,  KC_HELPCARE,
         _______,  BT_HST1,  BT_HST2,  BT_HST3,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  RGB_SAD,  RGB_SAI,    KC_DELUP,  KC_MPRV,  KC_MNXT,  KC_TRY,
         KC_EVENT, RGB_MOD,  RGB_VAI,  RGB_HUI,  KC_REG,   RGB_SPI,  _______,  _______,  _______,  _______,  KC_ZUKO,  KC_ZUKO2, KC_ZUKO3,   KC_ZUKO4,  KC_ZUKO5, KC_AVAIL2,KC_RES,
         _______,  RGB_RMOD, RGB_VAD,  RGB_HUD,  RGB_SAD,  RGB_SPD,  _______,  _______,  _______,  _______,  _______,  KC_AWE,               KC_LOOK,
