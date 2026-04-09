@@ -324,7 +324,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         if (record->event.pressed) {
             SEND_STRING(SS_DOWN(X_LCTL)SS_DOWN(X_LSFT)SS_TAP(X_G)SS_UP(X_LSFT)SS_UP(X_LCTL)
             SS_DELAY(250)
-            "new"
+            "New"
             SS_TAP(X_ENT));
         } else {
         }
@@ -334,7 +334,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         if (record->event.pressed) {
             SEND_STRING(SS_DOWN(X_LCTL)SS_DOWN(X_LSFT)SS_TAP(X_G)SS_UP(X_LSFT)SS_UP(X_LCTL)
             SS_DELAY(250)
-            "waiting"
+            "Waiting"
             SS_TAP(X_ENT));
         } else {
         }
