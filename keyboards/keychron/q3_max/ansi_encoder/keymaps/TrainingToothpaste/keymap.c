@@ -215,7 +215,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         if (record->event.pressed) {
             SEND_STRING("Chelle from MSC Tech here. Just wanted to reach out and see if you still need assistance "
             SS_DELAY(250)
-            "with this request as we haven't heard back in a bit. If so, let us know and we'll be happy to help!");
+            "with this request. If so, let us know and we'll be happy to help!");
         } else {
         }
         break;
@@ -224,7 +224,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         if (record->event.pressed) {
             SEND_STRING("Thank you for reaching out. "
             SS_DELAY(250)
-            "I'd be happy to help! This is fake "
+            "I'd be happy to help! This appears to be a scam "
             SS_DELAY(250)
             SS_DOWN(X_LALT)SS_TAP(X_P0)SS_TAP(X_P1)SS_TAP(X_P5)SS_TAP(X_P1)SS_UP(X_LALT)
             SS_DELAY(250)
@@ -235,7 +235,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     case KC_SPAM2:
         if (record->event.pressed) {
-            SEND_STRING("Thank you for reporting this scam to us "
+            SEND_STRING("Thank you for reporting this to us "
             SS_DELAY(250)
             SS_DOWN(X_LALT)SS_TAP(X_P0)SS_TAP(X_P1)SS_TAP(X_P5)SS_TAP(X_P1)SS_UP(X_LALT)
             SS_DELAY(250)
